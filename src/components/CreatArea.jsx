@@ -10,6 +10,8 @@ function CreatArea(props){
     content:""
  })
 
+ const [isExpanded, setIsExpanded] = useState(false);
+
  function handleChange(event){
  const { name, value } = event.target;
 
@@ -32,12 +34,17 @@ function CreatArea(props){
    
   }
 
+  function expand(){
+    // whe the use clicks the textarea, display the button and set the textarea to 3 rows
+    setIsExpanded(true);
+  }
+
     return (
         <div>
         <form className="create-note">
-            <input name="title" onChange={handleChange} value={note.title} placeholder="Title" />
-            <textarea name="content" onChange={handleChange} value={note.content} placeholder="Take a note ..." rows="3"/>
-            <Zoom in={true}>
+            {isExpanded ? <input name="title" onChange={handleChange} value={note.title} placeholder="Title" /> : null}
+            <textarea name="content" onClick={expand} onChange={handleChange} value={note.content} placeholder="Take a note ..." rows= {isExpanded ? "3":"1"}/>
+            <Zoom in={isExpanded && true}>
             <Fab onClick={submitNote}><AddIcon /></Fab>
             </Zoom>
         </form>
