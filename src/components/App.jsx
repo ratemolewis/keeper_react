@@ -6,16 +6,23 @@ import CreatArea from "./CreatArea";
 
 function App(){
     //use state to track the changing array
-const [notes, setNote] =  useState([]);
+const [notes, setNotes] =  useState([]);
 
     function addNote(newNote){
-        setNote(preNote => {
+        setNotes(preNote => {
             // set the new note to the array with previous items and return it
            return [...preNote,newNote];
         });
         
         }
-
+function deleteItem(id){
+    // console.log("delete me");
+setNotes(preNotes=>{
+   return preNotes.filter((value, index)=>{
+        return index !== id;
+    });
+})
+}
     return <div>
         <Header />
         <CreatArea
@@ -28,6 +35,7 @@ const [notes, setNote] =  useState([]);
                 id={index}
                 title={noteItem.title}
                 content={noteItem.content}
+                onDelete={deleteItem}
             />
             
          })}

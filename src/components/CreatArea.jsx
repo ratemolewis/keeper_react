@@ -16,10 +16,14 @@ function CreatArea(props){
     };
  })
  }
- 
+
   function submitNote(event){
     //pass back the note to App.jsx
     props.onAdd(note);
+    setNote({
+        title:"",
+        content:""
+     });
     event.preventDefault();
    
   }
